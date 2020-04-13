@@ -1,0 +1,13 @@
+# =======================
+# IDEs and Editors
+# =======================
+
+.vscode
+
+# ============
+# Backend
+# ============
+
+node_modules
+config.json
+exampleData.json
