@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//Event model consisting of the event title, start and end time, and checkIn code
+//Event model consisting of the event title, description, start and end time, checkIn code, and splash URL
 var eventSchema = new Schema(
     {
     title: {
@@ -29,7 +29,7 @@ var eventSchema = new Schema(
         required: false
     }
 })
-//eventSchema.index({title: "text", description: "text", startTime: "text", checkIn: "text"})
+
 const Event = mongoose.model("Event", eventSchema);
 
 module.exports = {Event};

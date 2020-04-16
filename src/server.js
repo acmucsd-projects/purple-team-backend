@@ -5,10 +5,12 @@ const cors = require('cors');
 const morgan = require('morgan');
 const eventRoutes = require('./routes/eventRouter');
 const {getDatabase} = require('./database/mongo');
+const dotenv = require('dotenv')
+dotenv.config();
 
 //Express app and port
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 //Configure app to use bodyParser
 app.use(express.urlencoded({

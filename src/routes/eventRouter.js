@@ -1,19 +1,18 @@
 //dependencies
 const routes = require('express').Router();
-const data = require('../../exampleData.json');
+//const data = require('../../exampleData.json');
 const { Event } = require('../database/models/eventsModel');
 const { getDatabase } = require('../database/mongo');
 
 // GET JSON of all events
 routes.get('/all', async (req, res, next) => {
 
-    Event.find(function (err, messages) {
+    Event.find(function (err, events) {
         if (err) {
           console.log('error ', err.res);
         }
         else {
-          console.log(messages);
-          res.status(200).json(messages);
+          res.status(200).json(events);
         }
       })
 });
@@ -21,7 +20,6 @@ routes.get('/all', async (req, res, next) => {
 
 // POST a new event to the database
 routes.post('/event', (request, res) => {
-    console.log(request.body);
     if (!request.body || request.body == {}){
       return res.send("no request body")
     }
@@ -39,13 +37,14 @@ routes.post('/event', (request, res) => {
     
 });
 
+// GET specific events from the database via a "query" (title search, description, time, etc.)
 routes.get("/event/:query", (request, res) => {
-    var event = Event.find({ $text: { $search: request.params.query}}, function(err, messages){
+    var event = Event.find({ $text: { $search: request.params.query}}, function(err, events){
       if (err) {
         console.log('error ', err);
       }
       else {
-        res.status(200).json(messages);
+        res.status(200).json(events);
       }
     });
 })

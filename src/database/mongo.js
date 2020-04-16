@@ -1,8 +1,10 @@
+//dependencies
 const mongoose = require('mongoose');
-const config = require('../../config.json');
+const dotenv = require('dotenv')
+dotenv.config();
 
 //mongodb database: "splashes"
-const uri = "mongodb+srv://brilam8:" + config.mongoPass + "@splash-pages-eqhd7.mongodb.net/splashes?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.MONGO_PASS}@splash-pages-eqhd7.mongodb.net/splashes?retryWrites=true&w=majority`;
 
 let db = null;
 
