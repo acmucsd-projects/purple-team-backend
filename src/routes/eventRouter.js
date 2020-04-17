@@ -25,7 +25,7 @@ routes.post('/event', (request, res) => {
     }
     var event = new Event({
         title: request.body.title,
-        description: request.body.description,
+        location: request.body.location,
         startTime: request.body.startTime,
         endTime: request.body.endTime,
         checkIn: request.body.checkIn,

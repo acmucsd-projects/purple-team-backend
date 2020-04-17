@@ -8,9 +8,9 @@ var eventSchema = new Schema(
         type: String,
         required: true
     },
-    description: {
+    location: {
         type: String,
-        required: false
+        required: true
     },
     startTime: {
         type: Date,
