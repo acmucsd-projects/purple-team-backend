@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 //mongodb database: "splashes"
-const uri = `mongodb+srv://${process.env.MONGO_PASS}@splash-pages-eqhd7.mongodb.net/splashes?retryWrites=true&w=majority`;
+const uri = process.env.MONGO_URI;
 
 let db = null;
 
