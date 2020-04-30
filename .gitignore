@@ -9,6 +9,8 @@
 # ============
 
 node_modules
+npm-debug.log
+.DS_Store
 config.json
 exampleData.json
 .env
