@@ -1,7 +1,5 @@
 # ACM Purple Team Backend - Splash Pages
-Built in Express.js with care by the ACM Side Projects Purple Team.
-
-
+Built in Express.js with care by the ACM Side Projects Purple Team. Generate a splash page for your event with all of its details with minimal effort!
 
 
 
@@ -24,7 +22,8 @@ Get a development environment running.
 4. Rename the example environment file and edit its contents for a testing environment
    - `cp .env.example .env` to rename the example environment file
    - Edit the contents to reflect the `.env` configuration displayed below
-5. Run `npm start` to boot up your backend server
+5. Run `npm start:dev` to boot up your backend server in development mode.
+   - Use `npm start` to regularly launch your backend server.
 
 #### Example .env configuration
 
