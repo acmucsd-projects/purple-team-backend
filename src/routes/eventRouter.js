@@ -34,6 +34,21 @@ routes.post('/event', (request, res) => {
   });
 });
 
+// @route    DELETE event
+// @desc     Delete an event
+// @access   Private
+router.delete('/', async (req, res) => {
+  try {
+    // Remove event
+    await Event.findOneAndRemove({ event: req.event.id });
+
+    res.json({ msg: 'Event deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // GET specific events from the database via a "query" (title search, description, time, etc.)
 routes.get('/event/:query', (request, res) => {
   var event = Event.find({ $text: { $search: request.params.query } }, function(
