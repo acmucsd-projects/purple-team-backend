@@ -37,7 +37,7 @@ routes.post('/event', (request, res) => {
 // @route    DELETE event
 // @desc     Delete an event
 // @access   Private
-router.delete('/', async (req, res) => {
+routes.delete('/event', async (req, res) => {
   try {
     // Remove event
     await Event.findOneAndRemove({ event: req.body.id });
