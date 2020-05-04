@@ -40,7 +40,7 @@ routes.post('/event', (request, res) => {
 router.delete('/', async (req, res) => {
   try {
     // Remove event
-    await Event.findOneAndRemove({ event: req.event.id });
+    await Event.findOneAndRemove({ event: req.body.id });
 
     res.json({ msg: 'Event deleted' });
   } catch (err) {

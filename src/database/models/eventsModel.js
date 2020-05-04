@@ -24,7 +24,7 @@ var eventSchema = new Schema({
     required: true
   },
   tags: {
-    type: String,
+    type: Array,
     required: true
   },
   url: {
