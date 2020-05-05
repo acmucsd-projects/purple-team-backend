@@ -3,6 +3,7 @@ const routes = require('express').Router();
 
 const { Event } = require('../database/models/eventsModel');
 const { getDatabase } = require('../database/mongo');
+const dbHandler = require('../test/db-handler')
 
 // GET JSON of all events
 routes.get('/all', async (req, res, next) => {

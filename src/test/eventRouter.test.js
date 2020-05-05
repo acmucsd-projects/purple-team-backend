@@ -45,18 +45,21 @@ describe('insert', () => {
   });
  
   afterAll(async () => {
+    console.log("Closing...")
     await dbHandler.closeDatabase();
+    console.log("Closed")
     /*await mongoose.disconnect();
     await mongod.stop();
     await db.close();*/
   });
 
 
-  test("It should response the GET method", () => {
-    return request(app)
+  test("It should response the GET method", async done => {
+    request(app)
       .get("/")
       .then(response => {
         expect(response.statusCode).toBe(200);
+        done();
       })
   })
 
