@@ -4,8 +4,9 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-	"start": "node ./src/server.js",
-    "start:dev": "nodemon ./src/server.js"
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js",
+    "test": "jest --runInBand ./src/test"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -17,12 +18,18 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongodb": "^3.5.5",
-    "mongodb-memory-server": "^6.5.2",
     "mongoose": "^5.9.7",
     "morgan": "^1.9.1",
     "pug": "^2.0.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^26.0.1",
+    "mongodb-memory-server": "^6.5.2",
+    "@shelf/jest-mongodb": "^1.1.5",
+    "nodemon": "^2.0.3",
+    "superagent": "^5.2.2",
+    "supertest": "^4.0.2"
   }
 }
