@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 //Event model consisting of the event title, description, start and end time, checkIn code, and splash URL
-var eventSchema = new Schema(
+let eventSchema = new Schema(
     {
     title: {
         type: String,
@@ -26,6 +26,10 @@ var eventSchema = new Schema(
     },
     url: {
         type: String,
+        required: false
+    },
+    tags: {
+        type: Array,
         required: false
     }
 })
