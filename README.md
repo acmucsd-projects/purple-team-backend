@@ -22,7 +22,7 @@ Get a development environment running.
 4. Rename the example environment file and edit its contents for a testing environment
    - `cp .env.example .env` to rename the example environment file
    - Edit the contents to reflect the `.env` configuration displayed below
-5. Run `npm start:dev` to boot up your backend server in development mode.
+5. Run `npm run dev` to boot up your backend server in development mode.
    - Use `npm start` to regularly launch your backend server.
 
 #### Example .env configuration
