@@ -33,7 +33,6 @@ var mockEvent2 = new Event({
 })
   
 describe('routes', () => {
-
   afterEach(async () => {
     await dbHandler.clearDatabase();
     //await db.collection('events').deleteMany({});
