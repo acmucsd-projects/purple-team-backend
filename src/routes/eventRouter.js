@@ -1,6 +1,6 @@
 //dependencies
 const routes = require('express').Router();
-//const data = require('../../exampleData.json');
+
 const { Event } = require('../database/models/eventsModel');
 const { getDatabase } = require('../database/mongo');
 
