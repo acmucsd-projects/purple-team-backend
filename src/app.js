@@ -31,8 +31,6 @@ app.use(morgan('combined'));
 //All routes regarding events
 app.use('/events', eventRoutes);
 
-
-
 app.get('/', function (req, res){
     return res.status(200).send({message: "Welcome to the ACM Backend Server"});
 });

@@ -61,7 +61,9 @@ describe('routes', () => {
   });
  
   afterAll(async () => {
+    console.log("Closing...")
     await dbHandler.closeDatabase();
+    console.log("Closed")
     /*await mongoose.disconnect();
     await mongod.stop();
     await db.close();*/
