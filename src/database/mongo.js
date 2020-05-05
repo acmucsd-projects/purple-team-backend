@@ -23,7 +23,7 @@ async function startDatabase(){
     db = mongoose.connection
     
     //set up text index for collection "events," allowing for keyword search
-    db.collections.events.createIndex({title: "text", description: "text", startTime: "text", checkIn: "text", tags: "text"});
+    db.collections.events.createIndex({title: "text", description: "text", startTime: "text", checkIn: "text"});
 }
 
 async function getDatabase(){

@@ -4,11 +4,18 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const eventRoutes = require('./routes/eventRouter');
-const {getDatabase} = require('./database/mongo');
 const dotenv = require('dotenv')
-
 dotenv.config();
 
+const {getDatabase} = require('./database/mongo');  //MongoDatabase
+const dbHandler = require('./test/db-handler') //In-memory testing mongoDB
+
+if (process.env.NODE_ENV == "development") {
+    const database = dbHandler.connect();
+}
+else {
+    const database = getDatabase()
+}
 //Express app and port
 const app = express();
 const port = process.env.PORT
@@ -25,7 +32,7 @@ app.use(morgan('combined'));
 //All routes regarding events
 app.use('/events', eventRoutes);
 
-const database = getDatabase()
+
 
 app.get('/', function (req, res){
     return res.status(200).send("Welcome to the ACM Backend Server");
@@ -33,7 +40,7 @@ app.get('/', function (req, res){
 
 module.exports = app;
 
-app.listen(port, () =>{
+/*app.listen(port, () =>{
     console.log("Listening on port "+port);
-});
+});*/
 
