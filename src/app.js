@@ -7,15 +7,14 @@ const eventRoutes = require('./routes/eventRouter');
 const dotenv = require('dotenv')
 dotenv.config();
 
-const {getDatabase} = require('./database/mongo');  //MongoDatabase
+//const {getDatabase} = require('./database/mongo');  //MongoDatabase
 const dbHandler = require('./test/db-handler') //In-memory testing mongoDB
 
-if (process.env.NODE_ENV == "development") {
-    const database = dbHandler.connect();
-}
-else {
+if (process.env.NODE_ENV != "test") {
+    //const database = dbHandler.connect();
     const database = getDatabase()
 }
+
 //Express app and port
 const app = express();
 const port = process.env.PORT
@@ -35,7 +34,7 @@ app.use('/events', eventRoutes);
 
 
 app.get('/', function (req, res){
-    return res.status(200).send("Welcome to the ACM Backend Server");
+    return res.status(200).send({message: "Welcome to the ACM Backend Server"});
 });
 
 module.exports = app;
