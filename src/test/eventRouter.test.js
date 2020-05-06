@@ -4,18 +4,35 @@ const { Event } = require('../database/models/eventsModel');
 const request = require("supertest");
 const dbHandler = require('./db-handler');
 const app = require("../app");
+var ObjectId = require('mongodb').ObjectID;
 
-const mongod = new MongoMemoryServer();
+//const mongod = new MongoMemoryServer();
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
+//const mongoose = require('mongoose');
 
-const mongoose = require('mongoose');
+//let connection;
+let db;
 
-  let connection;
-  let db;
+var mockEvent = new Event({
+  title: "watch garrett chug ketchup",
+  location: "Garrett's House",
+  startTime: new Date(2020, 5, 25, 15, 0, 0, 0),
+  endTime: new Date(2020, 5, 25, 17, 0, 0, 0),
+  checkIn: "ketchupChug",
+  url: "google.com"
+})
 
-
+var mockEvent2 = new Event({
+  title: "building a cat cafe with stanley",
+  location: "qualcomm room",
+  startTime: new Date(2020, 5, 15, 12, 0, 0, 0),
+  endTime: new Date(2020, 5, 15, 15, 0, 0, 0),
+  checkIn: "snuCafe",
+  url: "roblox.com"
+})
   
-describe('insert', () => {
+describe('routes', () => {
 
   afterEach(async () => {
     await dbHandler.clearDatabase();
@@ -45,25 +62,43 @@ describe('insert', () => {
   });
  
   afterAll(async () => {
-    console.log("Closing...")
     await dbHandler.closeDatabase();
-    console.log("Closed")
     /*await mongoose.disconnect();
     await mongod.stop();
     await db.close();*/
   });
 
 
-  test("It should response the GET method", async done => {
+  test("It should response the GET method at root", async done => {
     request(app)
       .get("/")
       .then(response => {
         expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({message: "Welcome to the ACM Backend Server"})
         done();
       })
   })
 
+  test("test posting an event to /events/event", async () => {
+    //const events = db.collection('events');
+    const response = await request(app)
+      .post("/events/event")
+      .send(mockEvent)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
 
+    const events = db.collections['events']
+    
+    const getRes = await request(app)
+      .get("/events/event/id")
+      .send({_id: ObjectId(response.body._id)})
+      .set('Accept', 'application/json')
+    const localFind = await events.find({_id: ObjectId(response.body._id)}).next()
+    console.log(localFind)
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(getRes.body[0])
+    expect(JSON.stringify(response.body)).toEqual(JSON.stringify(localFind))
+  })
 
   test("should insert a user into collection", async done => {
       function callback(insertedEvent, mockEvent){
