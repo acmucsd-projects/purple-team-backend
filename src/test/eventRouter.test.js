@@ -94,10 +94,64 @@ describe('routes', () => {
       .send({_id: ObjectId(response.body._id)})
       .set('Accept', 'application/json')
     const localFind = await events.find({_id: ObjectId(response.body._id)}).next()
-    console.log(localFind)
+
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(getRes.body[0])
     expect(JSON.stringify(response.body)).toEqual(JSON.stringify(localFind))
+  })
+
+  test("test getting two events from /events/event", async () => {
+    //const events = db.collection('events');
+    const response = await request(app)
+      .post("/events/event")
+      .send(mockEvent)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+
+    const response2 = await request(app)
+      .post("/events/event")
+      .send(mockEvent2)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+
+    const events = db.collections['events']
+    
+    const getRes = await request(app)
+      .get("/events/event/")
+      .set('Accept', 'application/json')
+
+
+    var jsonArr = [response.body, response2.body]
+    
+    expect(response.statusCode).toBe(200);
+    expect(jsonArr).toEqual(getRes.body)
+  })
+
+  test("test getting all from /events/event", async () => {
+    //const events = db.collection('events');
+    const response = await request(app)
+      .post("/events/event")
+      .send(mockEvent)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+
+    const response2 = await request(app)
+      .post("/events/event")
+      .send(mockEvent2)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+
+    const events = db.collections['events']
+    
+    const getRes = await request(app)
+      .get("/events/event/")
+      .set('Accept', 'application/json')
+
+
+    var jsonArr = [response.body, response2.body]
+    
+    expect(response.statusCode).toBe(200);
+    expect(jsonArr).toEqual(getRes.body)
   })
 
   test("should insert a user into collection", async done => {

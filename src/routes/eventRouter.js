@@ -6,8 +6,8 @@ const { getDatabase } = require('../database/mongo');
 const dbHandler = require('../test/db-handler')
 var ObjectId = require('mongodb').ObjectID;
 
-// GET JSON of all events
-routes.get('/all', async (req, res, next) => {
+//GET JSON of all events
+/*routes.get('/all', async (req, res, next) => {
 
     Event.find(function (err, events) {
         if (err) {
@@ -17,7 +17,7 @@ routes.get('/all', async (req, res, next) => {
           res.status(200).json(events);
         }
       })
-});
+});*/
 
 
 // POST a new event to the database
@@ -38,6 +38,18 @@ routes.post('/event', (request, res) => {
   })
     
 });
+
+// GET all events from the database
+routes.get("/event", (request, res) => {
+  Event.find(function (err, events) {
+    if (err) {
+      console.log('error ', err.res);
+    }
+    else {
+      res.status(200).json(events);
+    }
+  })
+})
 
 // GET specific events from the database via a "query" (title search, description, time, etc.)
 routes.get("/event/:query", (request, res) => {
