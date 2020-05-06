@@ -7,8 +7,9 @@ const eventRoutes = require('./routes/eventRouter');
 const dotenv = require('dotenv')
 dotenv.config();
 
-const {getDatabase} = require('./database/mongo');  //MongoDatabase
-const dbHandler = require('./test/db-handler') //In-memory testing mongoDB
+const {getDatabase} = require('./database/mongo');  // MongoDatabase
+const dbHandler = require('./test/db-handler') // In-memory testing mongoDB
+
 console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV != "test") {
     //const database = dbHandler.connect();

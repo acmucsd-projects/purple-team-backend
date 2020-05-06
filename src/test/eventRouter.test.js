@@ -61,9 +61,7 @@ describe('routes', () => {
   });
  
   afterAll(async () => {
-    console.log("Closing...")
     await dbHandler.closeDatabase();
-    console.log("Closed")
     /*await mongoose.disconnect();
     await mongod.stop();
     await db.close();*/
@@ -95,7 +93,6 @@ describe('routes', () => {
       .send({_id: ObjectId(response.body._id)})
       .set('Accept', 'application/json')
     const localFind = await events.find({_id: ObjectId(response.body._id)}).next()
-
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(getRes.body[0])
     expect(JSON.stringify(response.body)).toEqual(JSON.stringify(localFind))
