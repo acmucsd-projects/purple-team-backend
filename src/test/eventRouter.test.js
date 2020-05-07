@@ -124,6 +124,8 @@ describe('routes', () => {
     var jsonArr = [response.body, response2.body]
     
     expect(response.statusCode).toBe(200);
+    expect(response2.statusCode).toBe(200);
+    expect(getRes.statusCode).toBe(200);
     expect(jsonArr).toEqual(getRes.body)
     expect(jsonArr.length).toEqual(2)
   })
@@ -152,7 +154,37 @@ describe('routes', () => {
     var jsonArr = [response.body, response2.body]
     
     expect(response.statusCode).toBe(200);
+    expect(response2.statusCode).toBe(200);
+    expect(getRes.statusCode).toBe(200);
     expect(jsonArr).toEqual(getRes.body)
+  })
+
+  test("should DELETE an event through /events/event", async () => {
+    //const events = db.collection('events');
+    const response = await request(app)
+      .post("/events/event")
+      .send(mockEvent)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+
+    const deleteRes = await request(app)
+      .delete("/events/event")
+      .send({_id: ObjectId(response.body._id)})
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+    
+    const getRes = await request(app)
+      .get("/events/event/")
+      .set('Accept', 'application/json')
+
+
+    var jsonArr = []
+    
+    expect(response.statusCode).toBe(200);
+    expect(deleteRes.statusCode).toBe(200);
+    expect(getRes.statusCode).toBe(200);
+    expect(jsonArr).toEqual(getRes.body)
+    expect(deleteRes.body).toEqual(response.body)
   })
 
   test("should insert a user into collection", async done => {
