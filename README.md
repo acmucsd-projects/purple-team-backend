@@ -24,6 +24,7 @@ Get a development environment running.
    - Edit the contents to reflect the `.env` configuration displayed below
 5. Run `npm run dev` to boot up your backend server in development mode.
    - Use `npm start` to regularly launch your backend server.
+   - Use `npm run test` to run unit tests on your routes
 
 #### Example .env configuration
 
@@ -54,4 +55,9 @@ Now your application should be setup on your Heroku account and is ready for req
 - `/src/database` - folder containing everything about the mongoDB database
 - `/src/database/models` - folder with all database models
 - `/src/routes` - contains all routes
+
+### NOTES
+
+- When running tests, mongod will be spun up in memory for fast tests ([mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server)).
+  - Otherwise, the app will attempt to connect to the MongoDB database referred to in the .env connection string variable.
 

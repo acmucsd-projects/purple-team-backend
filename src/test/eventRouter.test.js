@@ -125,6 +125,7 @@ describe('routes', () => {
     
     expect(response.statusCode).toBe(200);
     expect(jsonArr).toEqual(getRes.body)
+    expect(jsonArr.length).toEqual(2)
   })
 
   test("test getting all from /events/event", async () => {
