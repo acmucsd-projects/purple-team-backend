@@ -186,7 +186,6 @@ describe('routes', () => {
     expect(getRes.body.length).toEqual(0)
     expect(deleteRes.body).toEqual({msg:"Event deleted"})
   })
-
 });
 
 //set up text index for collection "events," allowing for keyword search

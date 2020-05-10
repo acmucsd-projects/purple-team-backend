@@ -6,6 +6,7 @@ const { getDatabase } = require('../database/mongo');
 const dbHandler = require('../test/db-handler')
 var ObjectId = require('mongodb').ObjectID;
 
+<<<<<<< HEAD
 // POST a new event to the database
 routes.post('/event', (request, res) => {
   if (!request.body || request.body == {}) {
@@ -24,6 +25,20 @@ routes.post('/event', (request, res) => {
     res.status(200).send(response);
   });
 });
+=======
+//GET JSON of all events
+/*routes.get('/all', async (req, res, next) => {
+
+    Event.find(function (err, events) {
+        if (err) {
+          console.log('error ', err.res);
+        }
+        else {
+          res.status(200).json(events);
+        }
+      })
+});*/
+>>>>>>> 97055fc08ed800d99afe2bf718870ab90f2b72b3
 
 // @route    DELETE event
 // @desc     Delete an event
@@ -38,6 +53,39 @@ routes.delete('/event', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+<<<<<<< HEAD
+// GET all events from the database
+routes.get("/event", (request, res) => {
+  Event.find(function (err, events) {
+    if (err) {
+      console.log('error ', err.res);
+    }
+    else {
+      res.status(200).json(events);
+    }
+  })
+})
+=======
+// POST a new event to the database
+routes.post('/event', (request, res) => {
+  if (!request.body || request.body == {}){
+    return res.send("no request body")
+  }
+  var event = new Event({
+      title: request.body.title,
+      location: request.body.location,
+      startTime: request.body.startTime,
+      endTime: request.body.endTime,
+      checkIn: request.body.checkIn,
+      url: request.body.url
+  }).save((err, response) => {
+      if (err) res.status(400).send(err)
+      res.status(200).send(response)
+  })
+    
+});
+>>>>>>> 97055fc08ed800d99afe2bf718870ab90f2b72b3
 
 // GET all events from the database
 routes.get("/event", (request, res) => {
