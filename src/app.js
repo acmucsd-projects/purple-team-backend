@@ -7,14 +7,9 @@ const eventRoutes = require('./routes/eventRouter');
 const dotenv = require('dotenv')
 dotenv.config();
 
-<<<<<<< HEAD
 const {getDatabase} = require('./database/mongo');  // MongoDatabase
 const dbHandler = require('./test/db-handler') // In-memory testing mongoDB
 
-=======
-const {getDatabase} = require('./database/mongo');  //MongoDatabase
-const dbHandler = require('./test/db-handler') //In-memory testing mongoDB
->>>>>>> 97055fc08ed800d99afe2bf718870ab90f2b72b3
 console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV != "test") {
     //const database = dbHandler.connect();
@@ -37,22 +32,7 @@ app.use(morgan('combined'));
 //All routes regarding events
 app.use('/events', eventRoutes);
 
-<<<<<<< HEAD
 app.get('/', function (req, res){
     return res.status(200).send({message: "Welcome to the ACM Backend Server"});
 });
 module.exports = app;
-=======
-
-
-app.get('/', function (req, res){
-    return res.status(200).send({message: "Welcome to the ACM Backend Server"});
-});
-
-module.exports = app;
-
-/*app.listen(port, () =>{
-    console.log("Listening on port "+port);
-});*/
-
->>>>>>> 97055fc08ed800d99afe2bf718870ab90f2b72b3
