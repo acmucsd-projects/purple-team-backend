@@ -20,6 +20,7 @@ var mockEvent = new Event({
   startTime: new Date(2020, 5, 25, 15, 0, 0, 0),
   endTime: new Date(2020, 5, 25, 17, 0, 0, 0),
   checkIn: "ketchupChug",
+  tags: ["Social", "Garrett"],
   url: "google.com"
 })
 
@@ -29,6 +30,7 @@ var mockEvent2 = new Event({
   startTime: new Date(2020, 5, 15, 12, 0, 0, 0),
   endTime: new Date(2020, 5, 15, 15, 0, 0, 0),
   checkIn: "snuCafe",
+  tags: ["Social", "Stanley"],
   url: "roblox.com"
 })
   
@@ -95,7 +97,6 @@ describe('routes', () => {
     const localFind = await events.find({_id: ObjectId(response.body._id)}).next()
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(getRes.body[0])
-    expect(JSON.stringify(response.body)).toEqual(JSON.stringify(localFind))
   })
 
   test("test getting two events from /events/event", async () => {
@@ -125,7 +126,7 @@ describe('routes', () => {
     expect(response2.statusCode).toBe(200);
     expect(getRes.statusCode).toBe(200);
     expect(jsonArr).toEqual(getRes.body)
-    expect(jsonArr.length).toEqual(2)
+    expect(getRes.body.length).toEqual(2)
   })
 
   test("test getting all from /events/event", async () => {
@@ -182,66 +183,10 @@ describe('routes', () => {
     expect(deleteRes.statusCode).toBe(200);
     expect(getRes.statusCode).toBe(200);
     expect(jsonArr).toEqual(getRes.body)
-    expect(deleteRes.body).toEqual(response.body)
+    expect(getRes.body.length).toEqual(0)
+    expect(deleteRes.body).toEqual({msg:"Event deleted"})
   })
 
-  test("should DELETE an event through /events/event", async () => {
-    //const events = db.collection('events');
-    const response = await request(app)
-      .post("/events/event")
-      .send(mockEvent)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/);
-
-    const deleteRes = await request(app)
-      .delete("/events/event")
-      .send({_id: ObjectId(response.body._id)})
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/);
-    
-    const getRes = await request(app)
-      .get("/events/event/")
-      .set('Accept', 'application/json')
-
-
-    var jsonArr = []
-    
-    expect(response.statusCode).toBe(200);
-    expect(deleteRes.statusCode).toBe(200);
-    expect(getRes.statusCode).toBe(200);
-    expect(jsonArr).toEqual(getRes.body)
-    expect(deleteRes.body).toEqual(response.body)
-  })
-
-  test("should insert a user into collection", async done => {
-      function callback(insertedEvent, mockEvent){
-        try {
-          expect(JSON.stringify(insertedEvent)).toEqual(JSON.stringify(mockEvent));
-          done();
-        }
-        catch (error){
-          done(error);
-        }
-      }
-      const events = db.collection('events');
-
-      var mockEvent = new Event({
-          title: "watch garrett chug ketchup",
-          location: "Garrett's House",
-          startTime: new Date(2020, 5, 25, 15, 0, 0, 0),
-          endTime: new Date(2020, 5, 25, 17, 0, 0, 0),
-          checkIn: "ketchupChug",
-          url: "google.com"
-      })
-
-      await events.insertOne(mockEvent, async function(err){
-        if (err) return;
-
-        var objectId = mockEvent._id;
-        const insertedEvent = await events.findOne({_id: objectId});
-        callback(insertedEvent, mockEvent);
-      })
-  });
 });
 
 //set up text index for collection "events," allowing for keyword search

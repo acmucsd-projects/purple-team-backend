@@ -6,17 +6,6 @@ const { getDatabase } = require('../database/mongo');
 const dbHandler = require('../test/db-handler')
 var ObjectId = require('mongodb').ObjectID;
 
-// GET JSON of all events
-routes.get('/all', async (req, res, next) => {
-  Event.find(function(err, events) {
-    if (err) {
-      console.log('error ', err.res);
-    } else {
-      res.status(200).json(events);
-    }
-  });
-});
-
 // POST a new event to the database
 routes.post('/event', (request, res) => {
   if (!request.body || request.body == {}) {
@@ -42,7 +31,7 @@ routes.post('/event', (request, res) => {
 routes.delete('/event', async (req, res) => {
   try {
     // Remove event
-    await Event.findOneAndRemove({ event: req.body.id });
+    await Event.findOneAndDelete({ event: req.body.id });
     res.json({ msg: 'Event deleted' });
   } catch (err) {
     console.error(err.message);

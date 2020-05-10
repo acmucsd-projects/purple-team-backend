@@ -17,7 +17,7 @@ module.exports.connect = async () => {
   await mongoose.connect(uri, mongooseOptions)
     .then(() => console.log("Connected to test mongoDB in-memory"));
   db = await mongoose.connection
-  db.collections.events.createIndex({title: "text", description: "text", startTime: "text", checkIn: "text"});
+  db.collections.events.createIndex({title: "text", location: "text", startTime: "text", tags: "text"});
   return db;
 }
 

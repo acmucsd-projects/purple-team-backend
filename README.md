@@ -58,6 +58,6 @@ Now your application should be setup on your Heroku account and is ready for req
 
 ### NOTES
 
-- When running tests, mongod will be spun up in memory for fast tests ([mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server)).
+- When running tests, mongod will be spun up in memory for easy tests ([mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server)).
   - Otherwise, the app will attempt to connect to the MongoDB database referred to in the .env connection string variable.
 
