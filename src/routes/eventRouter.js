@@ -4,14 +4,14 @@ const routes = require('express').Router();
 const { Event } = require('../database/models/eventsModel');
 const { getDatabase } = require('../database/mongo');
 const dbHandler = require('../test/db-handler')
-var ObjectId = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 
 // POST a new event to the database
 routes.post('/event', (request, res) => {
   if (!request.body || request.body == {}) {
     return res.send('no request body');
   }
-  var event = new Event({
+  const event = new Event({
     title: request.body.title,
     location: request.body.location,
     startTime: request.body.startTime,
@@ -66,7 +66,7 @@ routes.get("/event", (request, res) => {
 // GET specific events from the database via a "query" (title search, description, time, etc.)
 routes.get("/event/:query", (request, res) => {
     if (request.body && request.params.query == "id"){
-      var event = Event.find({ _id: new ObjectId(request.body._id)}, function(err, events){
+      const event = Event.find({ _id: new ObjectId(request.body._id)}, function(err, events){
         if (err) {
           console.log('error ', err);
         }
@@ -76,7 +76,7 @@ routes.get("/event/:query", (request, res) => {
       });
     }
     else {
-      var event = Event.find({ $text: { $search: request.params.query}}, function(err, events){
+      const event = Event.find({ $text: { $search: request.params.query}}, function(err, events){
         if (err) {
           console.log('error ', err);
         }

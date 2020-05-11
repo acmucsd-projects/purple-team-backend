@@ -4,17 +4,16 @@ const { Event } = require('../database/models/eventsModel');
 const request = require("supertest");
 const dbHandler = require('./db-handler');
 const app = require("../app");
-var ObjectId = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 
 //const mongod = new MongoMemoryServer();
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
 //const mongoose = require('mongoose');
 
-//let connection;
 let db;
 
-var mockEvent = new Event({
+const mockEvent = new Event({
   title: "watch garrett chug ketchup",
   location: "Garrett's House",
   startTime: new Date(2020, 5, 25, 15, 0, 0, 0),
@@ -24,7 +23,7 @@ var mockEvent = new Event({
   url: "google.com"
 })
 
-var mockEvent2 = new Event({
+const mockEvent2 = new Event({
   title: "building a cat cafe with stanley",
   location: "qualcomm room",
   startTime: new Date(2020, 5, 15, 12, 0, 0, 0),
@@ -120,7 +119,7 @@ describe('routes', () => {
       .set('Accept', 'application/json')
 
 
-    var jsonArr = [response.body, response2.body]
+    const jsonArr = [response.body, response2.body]
     
     expect(response.statusCode).toBe(200);
     expect(response2.statusCode).toBe(200);
@@ -150,7 +149,7 @@ describe('routes', () => {
       .set('Accept', 'application/json')
 
 
-    var jsonArr = [response.body, response2.body]
+      const jsonArr = [response.body, response2.body]
     
     expect(response.statusCode).toBe(200);
     expect(response2.statusCode).toBe(200);
@@ -177,7 +176,7 @@ describe('routes', () => {
       .set('Accept', 'application/json')
 
 
-    var jsonArr = []
+      const jsonArr = []
     
     expect(response.statusCode).toBe(200);
     expect(deleteRes.statusCode).toBe(200);
