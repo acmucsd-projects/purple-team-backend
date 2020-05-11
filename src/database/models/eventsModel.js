@@ -1,8 +1,8 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 //Event model consisting of the event title, description, start and end time, checkIn code, and splash URL
-let eventSchema = new Schema(
+const eventSchema = new Schema(
     {
     title: {
         type: String,

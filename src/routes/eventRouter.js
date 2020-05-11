@@ -23,7 +23,7 @@ routes.post('/event', (request, res) => {
     if (!request.body || request.body == {}){
       return res.send("no request body")
     }
-    let event = new Event({
+    const event = new Event({
         title: request.body.title,
         location: request.body.location,
         startTime: request.body.startTime,
@@ -47,9 +47,19 @@ routes.delete('/event', (request, res) => {
     }
 });
 
+routes.edit('/event', (request, res) => {
+    const event = Event.findByIdAndUpdate(request.body.id, {$set: request.body}, function(err, events) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        res.status(200).json(events).send("updated");
+      }
+    });
+});
+
 // GET specific events from the database via a "query" (title search, description, time, etc.)
 routes.get("/event/:query", (request, res) => {
-    let event = Event.find({ $text: { $search: request.params.query}}, function(err, events){
+    const event = Event.find({ $text: { $search: request.params.query}}, function(err, events){
       if (err) {
         console.log('error ', err);
       }
