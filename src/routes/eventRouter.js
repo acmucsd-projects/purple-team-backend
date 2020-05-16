@@ -39,6 +39,23 @@ routes.delete('/event', async (req, res) => {
   }
 });
 
+// @route    MODIFY event
+// @desc     Modify an event
+// @access   Private
+routes.put('/event', async (req, res) => {
+  if (req.body.length != 2) {
+    return res.send("Modify Request Body lacking arguments.")
+  }
+  try {
+    // Remove event
+    await Event.updateOne({ _id: req.body[0].id }, req.body[1]);
+    res.json({ msg: "Event "+req.body[0].id+" Modified" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // GET all events from the database
 routes.get("/event", (request, res) => {
   Event.find(function (err, events) {
@@ -86,5 +103,6 @@ routes.get("/event/:query", (request, res) => {
       });
     }
 })
+
 
 module.exports = routes;
