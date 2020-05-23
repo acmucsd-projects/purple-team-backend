@@ -38,15 +38,19 @@ routes.post('/event', (request, res) => {
     
 });
 
-routes.delete('/event', (request, res) => {
-    try {
-      Event.findByIdAndDelete(request.body.id);
-      res.status(200).send("deleted");
-    } catch (err) {
-      console.log('error ', err);
-    }
+routes.delete('/event', async (req, res) => {
+  try {
+    // Remove event
+    await Event.findOneAndRemove({ event: req.body.id });
+
+    res.json({ msg: 'Event deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
+/*
 routes.edit('/event', (request, res) => {
     const event = Event.findByIdAndUpdate(request.body.id, {$set: request.body}, function(err, events) {
       if (err) {
@@ -56,6 +60,7 @@ routes.edit('/event', (request, res) => {
       }
     });
 });
+*/
 
 // GET specific events from the database via a "query" (title search, description, time, etc.)
 routes.get("/event/:query", (request, res) => {
