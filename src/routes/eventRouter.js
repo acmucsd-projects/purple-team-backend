@@ -11,8 +11,6 @@ routes.post('/event', (request, res) => {
   if (!request.body || request.body == {}) {
     return res.send('no request body');
   }
-  console.log(request.body);
-  console.log("test");
   const event = new Event({
     title: request.body.title,
     location: request.body.location,
