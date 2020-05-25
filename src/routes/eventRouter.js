@@ -39,17 +39,16 @@ routes.delete('/event', async (req, res) => {
   }
 });
 
-// GET all events from the database
-routes.get("/event", (request, res) => {
-  Event.find(function (err, events) {
+routes.put ('/event', (request, res) => {
+    Event.findOneAndUpdate({_id: request.body._id}, {$set: request.body}, 
+                          {useFindAndModify: false}, function(err, events) {
     if (err) {
-      console.log('error ', err.res);
-    }
-    else {
+      console.log('error ', err);
+    } else {
       res.status(200).json(events);
     }
   })
-})
+});
 
 // GET all events from the database
 routes.get("/event", (request, res) => {
